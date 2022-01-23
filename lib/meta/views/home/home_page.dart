@@ -10,6 +10,7 @@ import 'package:sandesh/app/database/userdata/userData.db.dart';
 import 'package:sandesh/meta/views/home/views/chats/chats_view.dart';
 import 'package:sandesh/meta/views/home/views/rooms/rooms_view.dart';
 import 'package:sandesh/model/core/home%20provider/home.provider.dart';
+import 'package:socket_io_client/socket_io_client.dart' as io;
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -19,6 +20,34 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late io.Socket socket;
+
+  @override
+  void initState() {
+    // super.initState();
+    connectToSocket();
+  }
+
+  @override
+  void dispose() {
+    // socket.disconnect();
+    super.dispose();
+  }
+
+  connectToSocket() {
+    socket = io.io(
+        "http://192.168.42.173:8000",
+        io.OptionBuilder()
+            .setTransports(['websocket'])
+            .disableAutoConnect()
+            .setQuery({"username": "roarxaab"})
+            .build());
+
+    socket.connect();
+    print(socket.connected);
+    socket.onConnect((data) => print("Connected"));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

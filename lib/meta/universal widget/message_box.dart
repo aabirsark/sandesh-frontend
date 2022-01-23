@@ -11,7 +11,7 @@ class MessageBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 5, bottom: 12.0),
+      margin: const EdgeInsets.only(top: 10, bottom: 12.0),
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
       constraints: const BoxConstraints(
         minHeight: 60,
