@@ -52,12 +52,15 @@ class _SandeshAppState extends State<SandeshApp> {
       theme: ThemeData(
           fontFamily: GoogleFonts.nunito().fontFamily,
           brightness: Brightness.dark,
-          appBarTheme: const AppBarTheme(
+          appBarTheme: AppBarTheme(
               elevation: .0,
               color: Colors.black,
               centerTitle: true,
-              titleTextStyle: TextStyle(color: Colors.white),
-              iconTheme: IconThemeData(color: Colors.white)),
+              titleTextStyle: TextStyle(
+                  color: Colors.white,
+                  fontFamily: GoogleFonts.poppins().fontFamily,
+                  fontSize: 18),
+              iconTheme: const IconThemeData(color: Colors.white)),
           scaffoldBackgroundColor: Colors.black,
           primaryColor: primaryColor),
       home: const HomePage(),
