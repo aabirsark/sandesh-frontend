@@ -55,15 +55,15 @@ class CreateNewRoom extends StatelessWidget {
               SizedBox(
                 height: context.screenHeight * 0.05,
               ),
-              CustomJoinPageInputField(label: "Room Name"),
+              const CustomJoinPageInputField(label: "Room Name"),
               SizedBox(
                 height: context.screenHeight * 0.03,
               ),
-              CustomJoinPageInputField(label: "Room Desc (Optional)"),
+              const CustomJoinPageInputField(label: "Room Desc (Optional)"),
               SizedBox(
                 height: context.screenHeight * 0.03,
               ),
-              CustomJoinPageInputField(label: "Secret Code"),
+              const CustomJoinPageInputField(label: "Secret Code"),
               SizedBox(
                 height: context.screenHeight * 0.06,
               ),
