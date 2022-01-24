@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:sandesh/app/contants.dart';
+import 'package:sandesh/app/database/configs/db.config.dart';
 import 'package:sandesh/app/database/userdata/userData.db.dart';
 import 'package:sandesh/meta/views/home/home_page.dart';
 import 'package:sandesh/meta/views/onboardings/onboarding.dart';
@@ -17,7 +18,7 @@ void main() async {
 
   await Hive.initFlutter();
 
-  await UserDataDB.config();
+  await dbConfig();
 
   runApp(MultiProvider(
     providers: [
