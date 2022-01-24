@@ -15,7 +15,7 @@ import 'package:sandesh/meta/views/onboardings/auth/create_user.dart';
 import 'package:sandesh/meta/views/onboardings/auth/widgets/auth_text_field.dart';
 import 'package:sandesh/model/auth/auth_response_model.dart';
 import 'package:sandesh/model/auth/user_push_model.dart';
-import 'package:sandesh/model/core/auth%20proviser/sign_up.provider.dart';
+import 'package:sandesh/model/core/auth%20provider/sign_up.provider.dart';
 
 class OnBoardingSignUpPage extends StatefulWidget {
   const OnBoardingSignUpPage({Key? key}) : super(key: key);

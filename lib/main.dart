@@ -8,7 +8,7 @@ import 'package:sandesh/app/database/userdata/userData.db.dart';
 import 'package:sandesh/meta/views/home/home_page.dart';
 import 'package:sandesh/meta/views/onboardings/onboarding.dart';
 import 'package:provider/provider.dart';
-import 'package:sandesh/model/core/auth%20proviser/sign_up.provider.dart';
+import 'package:sandesh/model/core/auth%20provider/sign_up.provider.dart';
 import 'package:sandesh/model/core/home%20provider/home.provider.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 
