@@ -19,18 +19,21 @@ class ChatsAdapter extends TypeAdapter<Chats> {
     return Chats()
       ..username = fields[0] as String?
       ..avatarUri = fields[1] as String?
-      ..chats = (fields[2] as List).cast<ChatIndi>();
+      ..phNumber = fields[2] as String?
+      ..chats = (fields[3] as List).cast<ChatIndi>();
   }
 
   @override
   void write(BinaryWriter writer, Chats obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.username)
       ..writeByte(1)
       ..write(obj.avatarUri)
       ..writeByte(2)
+      ..write(obj.phNumber)
+      ..writeByte(3)
       ..write(obj.chats);
   }
 

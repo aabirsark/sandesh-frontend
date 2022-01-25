@@ -2,14 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:sandesh/app/database/userdata/userData.db.dart';
 import 'package:sandesh/app/extension/navigation.ext.dart';
 import 'package:sandesh/meta/universal%20widget/message_box.dart';
 import 'package:sandesh/meta/views/chats/widgets/msg_card.dart';
+import 'package:sandesh/model/database/chats%20model/chats_model.dart';
 
 class ChatsPage extends StatelessWidget {
-  const ChatsPage({Key? key, required this.title}) : super(key: key);
+  const ChatsPage({Key? key, required this.chatInfo}) : super(key: key);
 
-  final String title;
+  final Chats chatInfo;
 
   @override
   Widget build(BuildContext context) {
@@ -25,18 +27,18 @@ class ChatsPage extends StatelessWidget {
                 child: ListView.builder(
               reverse: true,
               physics: const BouncingScrollPhysics(),
-              itemCount: _data.length,
+              itemCount: chatInfo.chats.length,
               itemBuilder: (context, index) {
-                var data = _data[index];
-                return data.name == "Aabir Sarkar"
+                var data = chatInfo.chats[index];
+                return data.username == UserDataDB.username
                     ? SenderMessageCard(
-                        msg: data.message,
-                        time: data.time,
-                        senderName: data.name)
+                        msg: data.message ?? "",
+                        time: data.time ?? "",
+                        senderName: data.username ?? "")
                     : ReciverMessageCard(
-                        msg: data.message,
-                        time: data.time,
-                        senderName: data.name);
+                        msg: data.message ?? "",
+                        time: data.time ?? "",
+                        senderName: data.username ?? "");
               },
             ))
           ],
@@ -53,7 +55,7 @@ class ChatsPage extends StatelessWidget {
           },
           icon: const Icon(CupertinoIcons.left_chevron)),
       centerTitle: false,
-      title: Text(title,
+      title: Text(chatInfo.username ?? "",
           maxLines: 1,
           style: TextStyle(
               fontFamily: GoogleFonts.poppins().fontFamily, fontSize: 18)),
@@ -66,55 +68,3 @@ class ChatsPage extends StatelessWidget {
     );
   }
 }
-
-class Tempdata {
-  final String name;
-  final String time;
-  final String message;
-
-  const Tempdata(
-      {required this.message, required this.time, required this.name});
-}
-
-List<Tempdata> _data = const [
-  Tempdata(
-      message: "Hello? How it's been Going",
-      time: "6:39",
-      name: "Aabir Sarkar"),
-  Tempdata(
-      message: "fine!! what about you?", time: "6:39", name: "Kaveri Sarkar"),
-  Tempdata(message: "Alive...", time: "6:39", name: "Aabir Sarkar"),
-  Tempdata(
-      message: ":->> me also still breathing",
-      time: "6:39",
-      name: "Kaveri Sarkar"),
-  Tempdata(
-      message:
-          "Good... Well come home one day, Grandma was remembring you and me too... never met since a while...",
-      time: "6:39",
-      name: "Aabir Sarkar"),
-  Tempdata(
-      message: "I'll try... I was quite busy during this days",
-      time: "6:39",
-      name: "Kaveri Sarkar"),
-  Tempdata(
-      message: "Now how's your buisness?", time: "6:39", name: "Aabir Sarkar"),
-  Tempdata(
-      message: "I reckon everything fine now...",
-      time: "6:39",
-      name: "Aabir Sarkar"),
-  Tempdata(
-      message: "Try to take a leave please",
-      time: "6:39",
-      name: "Aabir Sarkar"),
-  Tempdata(
-      message: "Yaa I requested the Boss", time: "6:39", name: "Kaveri Sarkar"),
-  Tempdata(
-      message: "just waiting for his reply",
-      time: "6:39",
-      name: "Kaveri Sarkar"),
-  Tempdata(
-      message: "Okay! bye son talk you later",
-      time: "6:39",
-      name: "Kaveri Sarkar"),
-].reversed.toList();

@@ -15,5 +15,8 @@ class Chats extends HiveObject {
   String? avatarUri;
 
   @HiveField(2)
+  String? phNumber;
+
+  @HiveField(3)
   List<ChatIndi> chats = [];
 }
