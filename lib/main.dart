@@ -64,7 +64,7 @@ class _SandeshAppState extends State<SandeshApp> {
               iconTheme: const IconThemeData(color: Colors.white)),
           scaffoldBackgroundColor: Colors.black,
           primaryColor: primaryColor),
-      home: const HomePage(),
+      home: UserDataDB.username == null ? const OnBoarding() : const HomePage(),
     );
   }
 }

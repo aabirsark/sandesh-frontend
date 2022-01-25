@@ -1,5 +1,6 @@
 import 'package:sandesh/app/database/boxes.dart';
 import 'package:sandesh/app/database/userdata/userData.db.dart';
+import 'package:sandesh/app/utils/date_tools.dart';
 import 'package:sandesh/model/database/chats%20model/chats_individual.dart';
 import 'package:socket_io_client/socket_io_client.dart' as io;
 
@@ -51,6 +52,16 @@ class SocketClient {
         SocketDatabaseAgreement.createNewBaseAndAddMessage(
             data['from'], chatIndi);
       }
+    });
+  }
+
+  static sendMessage(String msg, String toUsername) {
+    socket.emit("chatMsg", <String, String>{
+      'msg': msg,
+      'from': UserDataDB.username ?? "",
+      'to': toUsername,
+      'date': DateFormates.currentDate(),
+      'time': DateFormates.currentTime()
     });
   }
 }
