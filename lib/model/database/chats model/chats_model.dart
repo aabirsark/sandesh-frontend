@@ -1,5 +1,6 @@
 import 'package:hive/hive.dart';
 import 'package:hive_generator/hive_generator.dart';
+import 'package:sandesh/model/database/chats%20model/chats_individual.dart';
 
 part 'chats_model.g.dart';
 
@@ -9,15 +10,10 @@ class Chats extends HiveObject {
   @HiveField(0)
   String? username; // will also be used to open a box
 
-  // ? lastMessage
-  @HiveField(1)
-  String? lastMessage;
-
-  // ? last chatted
-  @HiveField(2)
-  DateTime? lastChatted;
-
   // ? avater uri
-  @HiveField(3)
+  @HiveField(1)
   String? avatarUri;
+
+  @HiveField(2)
+  List<ChatIndi> chats = [];
 }

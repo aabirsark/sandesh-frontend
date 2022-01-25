@@ -1,4 +1,6 @@
+import 'package:sandesh/app/database/boxes.dart';
 import 'package:sandesh/app/database/userdata/userData.db.dart';
+import 'package:sandesh/model/database/chats%20model/chats_individual.dart';
 import 'package:socket_io_client/socket_io_client.dart' as io;
 
 class SocketClient {
@@ -35,7 +37,20 @@ class SocketClient {
     socket.onDisconnect((data) => print("socket disconnected"));
   }
 
-  static addChatsListeners(){
-    
+  static addChatsListeners() {
+    socket.on("chatMsg", (data) {
+      ChatIndi chatIndi = ChatIndi()
+        ..date = data['date']
+        ..time = data['time']
+        ..username = data['from']
+        ..message = data['msg'];
+
+      if (SocketDatabaseAgreement.isDataBaseExist(data['from'])) {
+        SocketDatabaseAgreement.updateChats(data['from'], chatIndi);
+      } else {
+        SocketDatabaseAgreement.createNewBaseAndAddMessage(
+            data['from'], chatIndi);
+      }
+    });
   }
 }
