@@ -107,6 +107,7 @@ class _OnBoardingSignUpPageState extends State<OnBoardingSignUpPage> {
                       } else {
                         UserDataDB.putAllFields(
                             uid: data.data!.uid!,
+                            phNumber: data.data!.phNumber!,
                             username: data.data!.username!,
                             name: data.data!.name!);
 

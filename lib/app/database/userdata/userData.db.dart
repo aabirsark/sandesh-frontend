@@ -25,10 +25,14 @@ class UserDataDB {
   // ? Setters -----------------------------------
 
   static putAllFields(
-      {required String uid, required String username, required String name}) {
+      {required String uid,
+      required String username,
+      required String name,
+      required String phNumber}) {
     _userDataBox.put("uid", uid);
     _userDataBox.put("username", username);
     _userDataBox.put("name", name);
+    _userDataBox.put("phone", phNumber);
   }
 
   static putUserId(String uid) {
@@ -43,6 +47,10 @@ class UserDataDB {
     _userDataBox.put("name", name);
   }
 
+  static putUserPhoneNumber(String phNumber) {
+    _userDataBox.put("phone", phNumber);
+  }
+
   // -----------------------------------
 
   // ? Getters ---------------------------------------------
@@ -50,4 +58,5 @@ class UserDataDB {
   static String? get uid => _userDataBox.get("uid");
   static String? get username => _userDataBox.get("username");
   static String? get name => _userDataBox.get("name");
+  static String? get phone => _userDataBox.get("phone");
 }

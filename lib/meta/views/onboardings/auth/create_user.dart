@@ -133,6 +133,7 @@ class _CreateUserState extends State<CreateUser> {
                             UserDataDB.putAllFields(
                                 uid: data.data!.uid!,
                                 username: data.data!.username!,
+                                phNumber: data.data!.phNumber!,
                                 name: data.data!.name!);
 
                             Navigator.pushAndRemoveUntil(
