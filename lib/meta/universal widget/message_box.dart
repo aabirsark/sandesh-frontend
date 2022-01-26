@@ -6,7 +6,10 @@ import 'package:iconsax/iconsax.dart';
 import 'package:sandesh/app/contants.dart';
 
 class MessageBox extends StatelessWidget {
-  const MessageBox({Key? key}) : super(key: key);
+  const MessageBox({Key? key, this.onSend, this.controller}) : super(key: key);
+
+  final VoidCallback? onSend;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +33,7 @@ class MessageBox extends StatelessWidget {
               )),
           Expanded(
               child: TextFormField(
+                controller: controller,
                   scrollPhysics: const BouncingScrollPhysics(),
                   cursorColor: primaryColor,
                   maxLines: null,
@@ -40,7 +44,7 @@ class MessageBox extends StatelessWidget {
                       border: InputBorder.none,
                       hintText: "Type a msg..."))),
           IconButton(
-              onPressed: () {},
+              onPressed: onSend,
               icon: SvgPicture.asset(
                 logoPathSVG,
                 color: primaryColor,

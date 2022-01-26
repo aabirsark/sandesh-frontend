@@ -50,7 +50,7 @@ class SocketClient {
         SocketDatabaseAgreement.updateChats(data['from'], chatIndi);
       } else {
         SocketDatabaseAgreement.createNewBaseAndAddMessage(
-            data['from'], chatIndi);
+            data['from'], chatIndi , null);
       }
     });
   }

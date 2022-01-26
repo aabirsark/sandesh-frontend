@@ -5,17 +5,21 @@ import 'package:iconsax/iconsax.dart';
 import 'package:sandesh/app/database/boxes.dart';
 import 'package:sandesh/app/database/userdata/userData.db.dart';
 import 'package:sandesh/app/extension/navigation.ext.dart';
+import 'package:sandesh/app/utils/date_tools.dart';
 import 'package:sandesh/meta/universal%20widget/message_box.dart';
 import 'package:sandesh/meta/views/chats/widgets/msg_card.dart';
+import 'package:sandesh/model/database/chats%20model/chats_individual.dart';
 import 'package:sandesh/model/database/chats%20model/chats_model.dart';
 
 class ChatsPage extends StatefulWidget {
   const ChatsPage({
     Key? key,
     required this.username,
+    this.phNumber,
   }) : super(key: key);
 
   final String username;
+  final String? phNumber;
 
   @override
   State<ChatsPage> createState() => _ChatsPageState();
@@ -23,6 +27,7 @@ class ChatsPage extends StatefulWidget {
 
 class _ChatsPageState extends State<ChatsPage> {
   Chats? chatInfo;
+  final TextEditingController _messageController = TextEditingController();
 
   @override
   void initState() {
@@ -30,6 +35,25 @@ class _ChatsPageState extends State<ChatsPage> {
       chatInfo = Boxes.getUser(widget.username);
     });
     super.initState();
+  }
+
+  onTap() {
+    if (_messageController.text.isNotEmpty) {
+      ChatIndi _msg = ChatIndi()
+        ..username = UserDataDB.uid
+        ..message = _messageController.text
+        ..date = DateFormates.currentDate()
+        ..time = DateFormates.currentTime();
+      SocketDatabaseAgreement.createNewBaseAndAddMessage(
+          widget.username, _msg, widget.phNumber);
+      if (chatInfo == null) {
+        setState(() {
+          chatInfo = Boxes.getUser(widget.username);
+        });
+      } else {
+        SocketDatabaseAgreement.updateChats(widget.username, _msg);
+      }
+    }
   }
 
   @override
@@ -41,7 +65,10 @@ class _ChatsPageState extends State<ChatsPage> {
         child: Column(
           verticalDirection: VerticalDirection.up,
           children: [
-            const MessageBox(),
+            MessageBox(
+              controller: _messageController,
+              onSend: onTap,
+            ),
             Expanded(
                 child: chatInfo != null
                     ? ListView.builder(

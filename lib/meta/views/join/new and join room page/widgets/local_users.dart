@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sandesh/app/api/auth_api_calls.dart';
 import 'package:sandesh/app/contants.dart';
+import 'package:sandesh/app/extension/navigation.ext.dart';
+import 'package:sandesh/meta/views/chats/chats_page.dart';
 import 'package:sandesh/model/auth/auth_response_model.dart';
 
 class LocalUsers extends StatefulWidget {
@@ -36,6 +38,12 @@ class _LocalUsersState extends State<LocalUsers> {
         : ListView.builder(
             itemCount: users.length,
             itemBuilder: (context, index) => ListTile(
+              onTap: () {
+                context.navigateTo(ChatsPage(
+                  username: users[index].username!,
+                  phNumber: users[index].phNumber!,
+                ));
+              },
               leading: CircleAvatar(
                 child: Text(
                   users[index].username!.substring(0, 1),
