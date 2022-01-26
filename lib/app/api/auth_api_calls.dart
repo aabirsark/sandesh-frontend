@@ -46,4 +46,48 @@ class AuthApi {
 
     return resModel;
   }
+
+  static Future<_GetAllUserData> getAllUsers() async {
+    late _GetAllUserData users;
+
+    try {
+      var uri = Uri.parse(API.getAllUsers);
+      var res = await http.get(uri);
+      var jsonRes = jsonDecode(res.body);
+      print(jsonRes);
+
+      if (res.statusCode != 200) print("Some error");
+
+      users = _GetAllUserData.fromJson(jsonRes);
+    } catch (e) {
+      users = _GetAllUserData(data: []);
+
+      print("Can't handle, get all users the event sorry");
+    }
+
+    return users;
+  }
+}
+
+class _GetAllUserData {
+  List<UserData> data = [];
+
+  _GetAllUserData({required this.data});
+
+  _GetAllUserData.fromJson(Map<String, dynamic> json) {
+    if (json['data'] != null) {
+      data = <UserData>[];
+      json['data'].forEach((v) {
+        data.add(UserData.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    if (this.data != null) {
+      data['data'] = this.data.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
 }

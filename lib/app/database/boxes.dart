@@ -5,6 +5,8 @@ import 'package:sandesh/model/database/chats%20model/chats_model.dart';
 
 class Boxes {
   static Box<Chats> chatBox = Hive.box<Chats>(chatBoxName);
+
+  static getUser(String username) => chatBox.get(username);
 }
 
 class SocketDatabaseAgreement {

@@ -28,7 +28,7 @@ class ChatListTile extends StatelessWidget {
     return ListTile(
       onTap: () {
         context.navigateTo(ChatsPage(
-          chatInfo: chatInfo,
+          username: chatInfo.username!,
         ));
       },
       // tileColor: Colors.white10,

@@ -2,16 +2,35 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:sandesh/app/database/boxes.dart';
 import 'package:sandesh/app/database/userdata/userData.db.dart';
 import 'package:sandesh/app/extension/navigation.ext.dart';
 import 'package:sandesh/meta/universal%20widget/message_box.dart';
 import 'package:sandesh/meta/views/chats/widgets/msg_card.dart';
 import 'package:sandesh/model/database/chats%20model/chats_model.dart';
 
-class ChatsPage extends StatelessWidget {
-  const ChatsPage({Key? key, required this.chatInfo}) : super(key: key);
+class ChatsPage extends StatefulWidget {
+  const ChatsPage({
+    Key? key,
+    required this.username,
+  }) : super(key: key);
 
-  final Chats chatInfo;
+  final String username;
+
+  @override
+  State<ChatsPage> createState() => _ChatsPageState();
+}
+
+class _ChatsPageState extends State<ChatsPage> {
+  Chats? chatInfo;
+
+  @override
+  void initState() {
+    setState(() {
+      chatInfo = Boxes.getUser(widget.username);
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,23 +43,25 @@ class ChatsPage extends StatelessWidget {
           children: [
             const MessageBox(),
             Expanded(
-                child: ListView.builder(
-              reverse: true,
-              physics: const BouncingScrollPhysics(),
-              itemCount: chatInfo.chats.length,
-              itemBuilder: (context, index) {
-                var data = chatInfo.chats[index];
-                return data.username == UserDataDB.username
-                    ? SenderMessageCard(
-                        msg: data.message ?? "",
-                        time: data.time ?? "",
-                        senderName: data.username ?? "")
-                    : ReciverMessageCard(
-                        msg: data.message ?? "",
-                        time: data.time ?? "",
-                        senderName: data.username ?? "");
-              },
-            ))
+                child: chatInfo != null
+                    ? ListView.builder(
+                        reverse: true,
+                        physics: const BouncingScrollPhysics(),
+                        itemCount: chatInfo!.chats.length,
+                        itemBuilder: (context, index) {
+                          var data = chatInfo!.chats[index];
+                          return data.username == UserDataDB.username
+                              ? SenderMessageCard(
+                                  msg: data.message ?? "",
+                                  time: data.time ?? "",
+                                  senderName: data.username ?? "")
+                              : ReciverMessageCard(
+                                  msg: data.message ?? "",
+                                  time: data.time ?? "",
+                                  senderName: data.username ?? "");
+                        },
+                      )
+                    : Container())
           ],
         ),
       ),
@@ -55,7 +76,7 @@ class ChatsPage extends StatelessWidget {
           },
           icon: const Icon(CupertinoIcons.left_chevron)),
       centerTitle: false,
-      title: Text(chatInfo.username ?? "",
+      title: Text(widget.username,
           maxLines: 1,
           style: TextStyle(
               fontFamily: GoogleFonts.poppins().fontFamily, fontSize: 18)),
