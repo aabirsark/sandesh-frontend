@@ -23,18 +23,9 @@ class ChatsView extends StatelessWidget {
                   itemBuilder: (context, index) => Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10.0),
                     child: ChatListTile(
-                        chatInfo: data.elementAt(index),
-                        title: data.elementAt(index).username ?? "",
-                        lastMessage: data
-                                .elementAt(index)
-                                .chats[data.elementAt(index).chats.length - 1]
-                                .message ??
-                            "",
-                        lastMessaged: data
-                                .elementAt(index)
-                                .chats[data.elementAt(index).chats.length - 1]
-                                .date ??
-                            ""),
+                      chatInfo: data.elementAt(index),
+                      index: index,
+                    ),
                   ),
                 )
               : const Center(

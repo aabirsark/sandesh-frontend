@@ -10,17 +10,10 @@ import 'package:sandesh/model/database/chats%20model/chats_individual.dart';
 import 'package:sandesh/model/database/chats%20model/chats_model.dart';
 
 class ChatListTile extends StatelessWidget {
-  const ChatListTile(
-      {Key? key,
-      required this.title,
-      required this.lastMessage,
-      required this.lastMessaged,
-      required this.chatInfo})
+  const ChatListTile({Key? key, required this.chatInfo, required this.index})
       : super(key: key);
 
-  final String title;
-  final String lastMessage;
-  final String lastMessaged;
+  final int index;
   final Chats chatInfo;
 
   @override
@@ -29,6 +22,7 @@ class ChatListTile extends StatelessWidget {
       onTap: () {
         context.navigateTo(ChatsPage(
           username: chatInfo.username!,
+          index: index,
         ));
       },
       // tileColor: Colors.white10,
@@ -60,7 +54,7 @@ class ChatListTile extends StatelessWidget {
       //     ),
       //   ],
       // ),
-      subtitle: Text(lastMessage),
+      subtitle: Text(chatInfo.chats[chatInfo.chats.length - 1].message ?? ""),
       trailing: Text(
         chatInfo.chats[chatInfo.chats.length - 1].date ?? "",
         style: const TextStyle(color: Colors.grey, fontSize: 14),

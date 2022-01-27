@@ -83,8 +83,7 @@ class _ChatsPageState extends State<ChatsPage> {
                 child: chatInfo != null
                     ? ValueListenableBuilder<Box<Chats>>(
                         valueListenable: Boxes.chatBox.listenable(),
-                        builder: (context, value, snapshot) {
-                          
+                        builder: (context, value, child) {
                           return ListView.builder(
                             reverse: true,
                             physics: const BouncingScrollPhysics(),
