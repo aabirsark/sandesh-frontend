@@ -20,7 +20,7 @@ class SocketClient {
 
   static connectSocket() {
     socket = io.io(
-        "http://192.168.42.173:8000",
+        "http://192.168.42.39:8000",
         io.OptionBuilder()
             .setTransports(['websocket'])
             .disableAutoConnect()
@@ -39,7 +39,7 @@ class SocketClient {
   }
 
   static addChatsListeners() {
-    socket.on("chatMsg", (data) {
+    socket.on("newChatMsg", (data) {
       ChatIndi chatIndi = ChatIndi()
         ..date = data['date']
         ..time = data['time']
@@ -50,13 +50,14 @@ class SocketClient {
         SocketDatabaseAgreement.updateChats(data['from'], chatIndi);
       } else {
         SocketDatabaseAgreement.createNewBaseAndAddMessage(
-            data['from'], chatIndi , null);
+            data['from'], chatIndi, null);
       }
     });
   }
 
   static sendMessage(String msg, String toUsername) {
-    socket.emit("chatMsg", <String, String>{
+    print(msg);
+    socket.emit("msg", <String, String>{
       'msg': msg,
       'from': UserDataDB.username ?? "",
       'to': toUsername,

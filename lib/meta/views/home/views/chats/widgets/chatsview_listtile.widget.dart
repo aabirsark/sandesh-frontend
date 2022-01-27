@@ -44,22 +44,23 @@ class ChatListTile extends StatelessWidget {
         chatInfo.username ?? "",
         style: const TextStyle(fontSize: 18),
       ),
-      subtitle: Row(
-        children: const [
-          Icon(
-            CupertinoIcons.chat_bubble,
-            color: primaryColor,
-            size: 20,
-          ),
-          SizedBox(
-            width: 5,
-          ),
-          Text(
-            "New Chat...",
-            style: TextStyle(color: primaryColor),
-          ),
-        ],
-      ),
+      // subtitle: Row(
+      //   children: const [
+      //     Icon(
+      //       CupertinoIcons.chat_bubble,
+      //       color: primaryColor,
+      //       size: 20,
+      //     ),
+      //     SizedBox(
+      //       width: 5,
+      //     ),
+      //     Text(
+      //       "New Chat...",
+      //       style: TextStyle(color: primaryColor),
+      //     ),
+      //   ],
+      // ),
+      subtitle: Text(lastMessage),
       trailing: Text(
         chatInfo.chats[chatInfo.chats.length - 1].date ?? "",
         style: const TextStyle(color: Colors.grey, fontSize: 14),

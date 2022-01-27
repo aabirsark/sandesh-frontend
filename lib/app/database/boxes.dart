@@ -29,6 +29,7 @@ class SocketDatabaseAgreement {
 
   static void createNewBaseAndAddMessage(
       String username, ChatIndi msg, String? phone) {
+    print("added");
     Chats chatInfo = Chats()
       ..username = username
       ..phNumber = phone

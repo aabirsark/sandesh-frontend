@@ -1,5 +1,5 @@
 import 'package:hive/hive.dart';
-import 'package:hive_generator/hive_generator.dart';
+
 import 'package:sandesh/model/database/chats%20model/chats_individual.dart';
 
 part 'chats_model.g.dart';

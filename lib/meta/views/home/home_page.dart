@@ -3,11 +3,13 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hive/hive.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
 import 'package:sandesh/app/contants.dart';
 import 'package:sandesh/app/database/userdata/userData.db.dart';
 import 'package:sandesh/app/extension/navigation.ext.dart';
+import 'package:sandesh/app/sockets/web_sockets.dart';
 import 'package:sandesh/meta/views/home/views/chats/chats_view.dart';
 import 'package:sandesh/meta/views/home/views/rooms/rooms_view.dart';
 import 'package:sandesh/meta/views/join/join_page.dart';
@@ -22,32 +24,19 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late io.Socket socket;
-
   @override
   void initState() {
-    // super.initState();
-    connectToSocket();
+    super.initState();
+    SocketClient.connectSocket();
+    SocketClient.addChatsListeners();
   }
 
   @override
   void dispose() {
     // socket.disconnect();
+    SocketClient.disconnectSocket();
+    Hive.close();
     super.dispose();
-  }
-
-  connectToSocket() {
-    socket = io.io(
-        "http://192.168.42.173:8000",
-        io.OptionBuilder()
-            .setTransports(['websocket'])
-            .disableAutoConnect()
-            .setQuery({"username": "roarxaab"})
-            .build());
-
-    socket.connect();
-    print(socket.connected);
-    socket.onConnect((data) => print("Connected"));
   }
 
   @override

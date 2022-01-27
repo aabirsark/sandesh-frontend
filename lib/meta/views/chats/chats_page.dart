@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:sandesh/app/database/boxes.dart';
 import 'package:sandesh/app/database/userdata/userData.db.dart';
 import 'package:sandesh/app/extension/navigation.ext.dart';
+import 'package:sandesh/app/sockets/web_sockets.dart';
 import 'package:sandesh/app/utils/date_tools.dart';
 import 'package:sandesh/meta/universal%20widget/message_box.dart';
 import 'package:sandesh/meta/views/chats/widgets/msg_card.dart';
@@ -16,10 +19,12 @@ class ChatsPage extends StatefulWidget {
     Key? key,
     required this.username,
     this.phNumber,
+    this.index,
   }) : super(key: key);
 
   final String username;
   final String? phNumber;
+  final int? index;
 
   @override
   State<ChatsPage> createState() => _ChatsPageState();
@@ -34,23 +39,28 @@ class _ChatsPageState extends State<ChatsPage> {
     setState(() {
       chatInfo = Boxes.getUser(widget.username);
     });
+
     super.initState();
   }
 
   onTap() {
     if (_messageController.text.isNotEmpty) {
       ChatIndi _msg = ChatIndi()
-        ..username = UserDataDB.uid
+        ..username = UserDataDB.username
         ..message = _messageController.text
         ..date = DateFormates.currentDate()
         ..time = DateFormates.currentTime();
-      SocketDatabaseAgreement.createNewBaseAndAddMessage(
-          widget.username, _msg, widget.phNumber);
       if (chatInfo == null) {
+        SocketDatabaseAgreement.createNewBaseAndAddMessage(
+            widget.username, _msg, widget.phNumber);
+        SocketClient.sendMessage(_messageController.text, widget.username);
         setState(() {
           chatInfo = Boxes.getUser(widget.username);
         });
       } else {
+        print(widget.username);
+        SocketClient.sendMessage(_messageController.text, widget.username);
+
         SocketDatabaseAgreement.updateChats(widget.username, _msg);
       }
     }
@@ -71,23 +81,30 @@ class _ChatsPageState extends State<ChatsPage> {
             ),
             Expanded(
                 child: chatInfo != null
-                    ? ListView.builder(
-                        reverse: true,
-                        physics: const BouncingScrollPhysics(),
-                        itemCount: chatInfo!.chats.length,
-                        itemBuilder: (context, index) {
-                          var data = chatInfo!.chats[index];
-                          return data.username == UserDataDB.username
-                              ? SenderMessageCard(
-                                  msg: data.message ?? "",
-                                  time: data.time ?? "",
-                                  senderName: data.username ?? "")
-                              : ReciverMessageCard(
-                                  msg: data.message ?? "",
-                                  time: data.time ?? "",
-                                  senderName: data.username ?? "");
-                        },
-                      )
+                    ? ValueListenableBuilder<Box<Chats>>(
+                        valueListenable: Boxes.chatBox.listenable(),
+                        builder: (context, value, snapshot) {
+                          
+                          return ListView.builder(
+                            reverse: true,
+                            physics: const BouncingScrollPhysics(),
+                            itemCount: chatInfo!.chats.length,
+                            itemBuilder: (context, index) {
+                              var data =
+                                  chatInfo!.chats.reversed.toList()[index];
+                              print(data.username);
+                              return data.username == UserDataDB.username
+                                  ? SenderMessageCard(
+                                      msg: data.message ?? "",
+                                      time: data.time ?? "",
+                                      senderName: data.username ?? "")
+                                  : ReciverMessageCard(
+                                      msg: data.message ?? "",
+                                      time: data.time ?? "",
+                                      senderName: data.username ?? "");
+                            },
+                          );
+                        })
                     : Container())
           ],
         ),
