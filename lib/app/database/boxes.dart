@@ -2,11 +2,18 @@ import 'package:hive/hive.dart';
 import 'package:sandesh/app/contants.dart';
 import 'package:sandesh/model/database/chats%20model/chats_individual.dart';
 import 'package:sandesh/model/database/chats%20model/chats_model.dart';
+import 'package:sandesh/model/database/rooms%20model/rooms_model.dart';
 
 class Boxes {
-  static Box<Chats> chatBox = Hive.box<Chats>(chatBoxName);
+  // ? Chat Box
 
+  static Box<Chats> chatBox = Hive.box<Chats>(chatBoxName);
   static getUser(String username) => chatBox.get(username);
+
+  // ? Room box
+
+  static Box<RoomsModel> roomBox = Hive.box<RoomsModel>(roomBoxName);
+  static getRoom(String code) => roomBox.get(code);
 }
 
 class SocketDatabaseAgreement {

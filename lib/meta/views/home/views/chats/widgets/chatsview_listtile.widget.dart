@@ -28,7 +28,7 @@ class ChatListTile extends StatelessWidget {
       // tileColor: Colors.white10,
       leading: CircleAvatar(
         child: Text(
-          chatInfo.username!.substring(0, 1),
+          chatInfo.username!.substring(0, 1).toUpperCase(),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: const TextStyle(color: Colors.white),

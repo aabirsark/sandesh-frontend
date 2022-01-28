@@ -1,40 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:sandesh/app/extension/navigation.ext.dart';
 import 'package:sandesh/meta/views/rooms/rooms_page.dart';
+import 'package:sandesh/model/database/rooms%20model/rooms_model.dart';
 
 class RoomViewListTile extends StatelessWidget {
-  const RoomViewListTile(
-      {Key? key,
-      required this.roomName,
-      required this.participants,
-      required this.lastSeen})
-      : super(key: key);
+  const RoomViewListTile({Key? key, required this.chatInfo}) : super(key: key);
 
-  final String roomName;
-  final int participants;
-  final String lastSeen;
+  final RoomsModel chatInfo;
+  
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       onTap: () {
-        context.navigateTo(RoomsPage(title: roomName));
+        context.navigateTo(RoomsPage(
+          title: chatInfo.roomName ?? "",
+        ));
       },
-      leading: const CircleAvatar(
+      leading: CircleAvatar(
         child: Text(
-          "F",
-          style: TextStyle(color: Colors.white),
+          chatInfo.roomName!.substring(0, 1).toUpperCase(),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: const TextStyle(color: Colors.white),
         ),
         radius: 23,
         backgroundColor: Colors.white10,
       ),
       title: Text(
-        roomName,
+        chatInfo.roomName ?? "",
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
         style: const TextStyle(fontSize: 18),
       ),
-      subtitle: Text("$participants participants"),
+      subtitle: Text(chatInfo.chats[chatInfo.chats.length - 1].message ?? ""),
       trailing: Text(
-        lastSeen,
+        chatInfo.chats[chatInfo.chats.length - 1].date ?? "",
         style: const TextStyle(color: Colors.grey, fontSize: 14),
       ),
     );

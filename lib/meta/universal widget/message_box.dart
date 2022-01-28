@@ -45,8 +45,8 @@ class MessageBox extends StatelessWidget {
                       hintText: "Type a msg..."))),
           IconButton(
               onPressed: () {
-                controller?.clear();
                 onSend!();
+                controller?.clear();
               },
               icon: SvgPicture.asset(
                 logoPathSVG,

@@ -14,7 +14,7 @@ class ChatsView extends StatelessWidget {
         valueListenable: Boxes.chatBox.listenable(),
         builder: (context, value, child) {
           var data = value.values.cast<Chats>().toList();
-          print(data[0].chats);
+        
 
           return data.isNotEmpty
               ? ListView.builder(

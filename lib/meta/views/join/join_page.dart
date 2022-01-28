@@ -4,6 +4,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:sandesh/app/contants.dart';
 import 'package:sandesh/app/extension/details.ext.dart';
 import 'package:sandesh/app/extension/navigation.ext.dart';
+import 'package:sandesh/meta/views/join/new%20and%20join%20room%20page/join_room.dart';
 import 'package:sandesh/meta/views/join/new%20and%20join%20room%20page/new_room.dart';
 import 'package:sandesh/meta/views/join/new%20and%20join%20room%20page/widgets/local_users.dart';
 
@@ -46,7 +47,9 @@ class JoinPage extends StatelessWidget {
                       JoinButtons(
                           width: constraints.maxWidth * 0.4,
                           icon: CupertinoIcons.person_2,
-                          onTap: () {},
+                          onTap: () {
+                            context.navigateTo(const JoinRoomPage());
+                          },
                           label: "Join joom"),
                     ],
                   );
