@@ -33,7 +33,7 @@ class MessageBox extends StatelessWidget {
               )),
           Expanded(
               child: TextFormField(
-                controller: controller,
+                  controller: controller,
                   scrollPhysics: const BouncingScrollPhysics(),
                   cursorColor: primaryColor,
                   maxLines: null,
@@ -44,7 +44,10 @@ class MessageBox extends StatelessWidget {
                       border: InputBorder.none,
                       hintText: "Type a msg..."))),
           IconButton(
-              onPressed: onSend,
+              onPressed: () {
+                controller?.clear();
+                onSend!();
+              },
               icon: SvgPicture.asset(
                 logoPathSVG,
                 color: primaryColor,

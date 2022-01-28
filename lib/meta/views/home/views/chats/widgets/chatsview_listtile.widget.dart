@@ -29,6 +29,8 @@ class ChatListTile extends StatelessWidget {
       leading: CircleAvatar(
         child: Text(
           chatInfo.username!.substring(0, 1),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
           style: const TextStyle(color: Colors.white),
         ),
         radius: 23,
@@ -36,6 +38,8 @@ class ChatListTile extends StatelessWidget {
       ),
       title: Text(
         chatInfo.username ?? "",
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
         style: const TextStyle(fontSize: 18),
       ),
       // subtitle: Row(

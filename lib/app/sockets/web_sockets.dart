@@ -1,3 +1,4 @@
+import 'package:sandesh/app/api/api.dart';
 import 'package:sandesh/app/database/boxes.dart';
 import 'package:sandesh/app/database/userdata/userData.db.dart';
 import 'package:sandesh/app/utils/date_tools.dart';
@@ -20,7 +21,7 @@ class SocketClient {
 
   static connectSocket() {
     socket = io.io(
-        "http://192.168.42.39:8000",
+        API.api,
         io.OptionBuilder()
             .setTransports(['websocket'])
             .disableAutoConnect()
