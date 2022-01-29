@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
-import 'package:sandesh/model/auth/auth_response_model.dart';
 
-class SignUpProvider with ChangeNotifier {
+class LoadUpProvider with ChangeNotifier {
   bool _showLoading = false;
 
   changeLoadingState() {

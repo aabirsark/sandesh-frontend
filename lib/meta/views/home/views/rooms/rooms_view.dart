@@ -14,17 +14,18 @@ class RoomView extends StatelessWidget {
         valueListenable: Boxes.roomBox.listenable(),
         builder: (context, value, child) {
           var data = value.values.cast<RoomsModel>().toList();
-
           return data.isNotEmpty
               ? ListView.builder(
                   itemCount: data.length,
                   physics: const BouncingScrollPhysics(),
-                  itemBuilder: (context, index) => Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10.0),
-                    child: RoomViewListTile(
-                      chatInfo: data.elementAt(index),
-                    ),
-                  ),
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10.0),
+                      child: RoomViewListTile(
+                        chatInfo: data[index],
+                      ),
+                    );
+                  },
                 )
               : const Center(
                   child: Text("No Rooms!"),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:sandesh/app/contants.dart';
 import 'package:sandesh/app/database/configs/db.config.dart';
@@ -9,9 +8,9 @@ import 'package:sandesh/app/database/userdata/userData.db.dart';
 import 'package:sandesh/meta/views/home/home_page.dart';
 import 'package:sandesh/meta/views/onboardings/onboarding.dart';
 import 'package:provider/provider.dart';
-import 'package:sandesh/model/core/auth%20provider/sign_up.provider.dart';
+
 import 'package:sandesh/model/core/home%20provider/home.provider.dart';
-import 'package:socket_io_client/socket_io_client.dart';
+import 'package:sandesh/model/core/util%20provider/load_up.provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +22,7 @@ void main() async {
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(
-        create: (context) => SignUpProvider(),
+        create: (context) => LoadUpProvider(),
       ),
       ChangeNotifierProvider(
         create: (context) => HomeStateProvider(),
@@ -45,6 +44,7 @@ class SandeshApp extends StatefulWidget {
 
 class _SandeshAppState extends State<SandeshApp> {
   bool firstTime = UserDataDB.uid == null;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

@@ -12,15 +12,13 @@ class UserDataDB {
   UserDataDB._internal();
 
   // -----------------------------
+  static late Box _userDataBox;
 
   static Future config() async {
-    await Hive.openBox(_hiveBoxName);
-    _userDataBox = Hive.box(_hiveBoxName);
+    _userDataBox = await Hive.openBox(_hiveBoxName);
   }
 
   static const _hiveBoxName = "userData";
-
-  static late Box _userDataBox;
 
   // ? Setters -----------------------------------
 

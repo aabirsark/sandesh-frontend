@@ -15,7 +15,7 @@ import 'package:sandesh/meta/views/onboardings/auth/login_page.dart';
 import 'package:sandesh/meta/views/onboardings/auth/widgets/auth_text_field.dart';
 import 'package:sandesh/model/auth/auth_response_model.dart';
 import 'package:sandesh/model/auth/user_push_model.dart';
-import 'package:sandesh/model/core/auth%20provider/sign_up.provider.dart';
+import 'package:sandesh/model/core/util%20provider/load_up.provider.dart';
 
 class CreateUser extends StatefulWidget {
   const CreateUser({Key? key}) : super(key: key);
@@ -107,8 +107,8 @@ class _CreateUserState extends State<CreateUser> {
                     InkWell(
                       borderRadius: BorderRadius.circular(10),
                       onTap: () async {
-                        if (!context.read<SignUpProvider>().loading) {
-                          var provder = context.read<SignUpProvider>();
+                        if (!context.read<LoadUpProvider>().loading) {
+                          var provder = context.read<LoadUpProvider>();
                           UserPushModel model = UserPushModel(
                               username: _usernameController.text,
                               password: _passwordController.text,
@@ -156,7 +156,7 @@ class _CreateUserState extends State<CreateUser> {
                             color: primaryColor,
                             borderRadius: BorderRadius.circular(10)),
                         child: Center(
-                          child: !context.watch<SignUpProvider>().loading
+                          child: !context.watch<LoadUpProvider>().loading
                               ? const Text(
                                   "Create account",
                                   style: TextStyle(

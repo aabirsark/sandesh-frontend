@@ -22,6 +22,7 @@ class CustomJoinPageInputField extends StatelessWidget {
           color: Colors.white10, borderRadius: BorderRadius.circular(10)),
       child: Center(
         child: TextFormField(
+          controller: controller,
           keyboardType: TextInputType.multiline,
           style: const TextStyle(color: Colors.white, fontSize: 18),
           cursorColor: primaryColor,

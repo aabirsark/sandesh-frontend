@@ -1,4 +1,6 @@
+
 import 'package:flutter/material.dart';
+import 'package:sandesh/app/contants.dart';
 import 'package:sandesh/app/extension/navigation.ext.dart';
 import 'package:sandesh/meta/views/rooms/rooms_page.dart';
 import 'package:sandesh/model/database/rooms%20model/rooms_model.dart';
@@ -7,7 +9,6 @@ class RoomViewListTile extends StatelessWidget {
   const RoomViewListTile({Key? key, required this.chatInfo}) : super(key: key);
 
   final RoomsModel chatInfo;
-  
 
   @override
   Widget build(BuildContext context) {
@@ -33,11 +34,16 @@ class RoomViewListTile extends StatelessWidget {
         overflow: TextOverflow.ellipsis,
         style: const TextStyle(fontSize: 18),
       ),
-      subtitle: Text(chatInfo.chats[chatInfo.chats.length - 1].message ?? ""),
-      trailing: Text(
-        chatInfo.chats[chatInfo.chats.length - 1].date ?? "",
-        style: const TextStyle(color: Colors.grey, fontSize: 14),
-      ),
+      // subtitle: Text(chatInfo.chats[chatInfo.chats.length].message ?? ""),
+      subtitle: chatInfo.chats.isNotEmpty
+          ? Text(
+              chatInfo.chats[chatInfo.chats.length - 1].message ?? "",
+              style: const TextStyle(color: Colors.grey, fontSize: 14),
+            )
+          : const Text(
+              "Start Chatting !",
+              style: TextStyle(color: primaryColor),
+            ),
     );
   }
 }

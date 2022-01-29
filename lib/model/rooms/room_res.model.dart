@@ -1,14 +1,14 @@
 class RoomResModel {
   String? feedback;
   bool? error;
-  RoomData? data;
+  Data? data;
 
   RoomResModel({this.feedback, this.error, this.data});
 
   RoomResModel.fromJson(Map<String, dynamic> json) {
     feedback = json['feedback'];
     error = json['error'];
-    data = json['data'] != null ? RoomData.fromJson(json['data']) : null;
+    data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -22,14 +22,14 @@ class RoomResModel {
   }
 }
 
-class RoomData {
+class Data {
   String? roomname;
   String? adminName;
   String? code;
 
-  RoomData({this.roomname, this.adminName, this.code});
+  Data({this.roomname, this.adminName, this.code});
 
-  RoomData.fromJson(Map<String, dynamic> json) {
+  Data.fromJson(Map<String, dynamic> json) {
     roomname = json['roomname'];
     adminName = json['adminName'];
     code = json['code'];
