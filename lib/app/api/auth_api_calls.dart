@@ -14,9 +14,11 @@ class AuthApi {
       var res = await http.post(uri,
           body: {"username": model.username, "password": model.password});
       var jsonRes = jsonDecode(res.body);
-      print(jsonRes);
 
-      if (res.statusCode != 200) print("Some error");
+      if (res.statusCode != 200) {
+        resModel =
+            AuthResponseModel(feedback: "Server Side error", error: true);
+      }
 
       resModel = AuthResponseModel.fromJson(jsonRes);
     } catch (e) {

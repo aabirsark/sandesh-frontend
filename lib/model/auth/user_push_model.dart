@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 class UserPushModel {
   String username;
   String password;
