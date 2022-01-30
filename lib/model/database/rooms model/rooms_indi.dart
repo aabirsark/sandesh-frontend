@@ -19,4 +19,8 @@ class RoomIndi extends HiveObject {
   // ? date
   @HiveField(3)
   String? date;
+
+  // ? code of the room
+  @HiveField(4)
+  String? roomCode;
 }

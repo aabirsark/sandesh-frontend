@@ -2,6 +2,7 @@ import 'package:hive/hive.dart';
 import 'package:sandesh/app/contants.dart';
 import 'package:sandesh/model/database/chats%20model/chats_individual.dart';
 import 'package:sandesh/model/database/chats%20model/chats_model.dart';
+import 'package:sandesh/model/database/rooms%20model/rooms_indi.dart';
 import 'package:sandesh/model/database/rooms%20model/rooms_model.dart';
 
 class Boxes {
@@ -34,6 +35,14 @@ class SocketDatabaseAgreement {
     }
   }
 
+  static void updateRoom(String roomcode, RoomIndi msg) {
+    if (Boxes.getRoom(roomcode) != null) {
+      Boxes.roomBox.get(roomcode)!
+        ..chats.add(msg)
+        ..save();
+    }
+  }
+
   static void createNewBaseAndAddMessage(
       String username, ChatIndi msg, String? phone) {
     print("added");
@@ -44,5 +53,15 @@ class SocketDatabaseAgreement {
 
     // ? first create
     Boxes.chatBox.put(username, chatInfo);
+  }
+
+  static List<String> getRoomCodes() {
+    var data = Boxes.roomBox.values.toList();
+    final List<String> codes = [];
+    for (var item in data) {
+      codes.add(item.code ?? "");
+    }
+
+    return codes;
   }
 }

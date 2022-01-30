@@ -29,6 +29,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     SocketClient.connectSocket();
     SocketClient.addChatsListeners();
+    SocketClient.joinRooms();
   }
 
   @override
