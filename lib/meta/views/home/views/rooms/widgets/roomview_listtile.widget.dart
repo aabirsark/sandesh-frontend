@@ -15,7 +15,7 @@ class RoomViewListTile extends StatelessWidget {
     return ListTile(
       onTap: () {
         context.navigateTo(RoomsPage(
-          title: chatInfo.roomName ?? "",
+          roomCode: chatInfo.code ?? "",
         ));
       },
       leading: CircleAvatar(

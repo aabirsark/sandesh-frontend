@@ -58,7 +58,6 @@ class _ChatsPageState extends State<ChatsPage> {
           chatInfo = Boxes.getUser(widget.username);
         });
       } else {
-        print(widget.username);
         SocketClient.sendMessage(_messageController.text, widget.username);
 
         SocketDatabaseAgreement.updateChats(widget.username, _msg);
@@ -91,7 +90,6 @@ class _ChatsPageState extends State<ChatsPage> {
                             itemBuilder: (context, index) {
                               var data =
                                   chatInfo!.chats.reversed.toList()[index];
-                              print(data.username);
                               return data.username == UserDataDB.username
                                   ? SenderMessageCard(
                                       msg: data.message ?? "",
