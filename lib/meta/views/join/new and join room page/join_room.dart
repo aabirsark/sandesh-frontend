@@ -113,11 +113,10 @@ class _JoinRoomPageState extends State<JoinRoomPage> {
                           ..adminName = res.data?.adminName;
 
                         Box box = Boxes.roomBox;
-                        await box.add(model);
+                        await box.put(_codeController.text, model);
 
                         Navigator.popUntil(context, (route) => route.isFirst);
                       }
-
                       context.read<LoadUpProvider>().changeLoadingState();
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(

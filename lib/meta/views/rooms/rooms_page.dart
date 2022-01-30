@@ -30,6 +30,7 @@ class _RoomsPageState extends State<RoomsPage> {
   void initState() {
     super.initState();
     controller = TextEditingController();
+    print(widget.roomCode);
     roomInfo = Boxes.getRoom(widget.roomCode);
   }
 
@@ -57,23 +58,28 @@ class _RoomsPageState extends State<RoomsPage> {
         child: Column(
           verticalDirection: VerticalDirection.up,
           children: [
-            const MessageBox(),
-            ValueListenableBuilder<Box<RoomsModel>>(
-              valueListenable: Boxes.roomBox.listenable(),
-              builder: (_, value, __) {
-                return ListView.builder(
-                  itemCount: roomInfo.chats.length,
-                  physics: const BouncingScrollPhysics(),
-                  reverse: true,
-                  itemBuilder: (context, index) {
-                    var msg = roomInfo.chats[index];
-                    return RoomsMsgCard(
-                        name: msg.username ?? "",
-                        message: msg.message ?? "",
-                        time: msg.time ?? "");
-                  },
-                );
-              },
+            MessageBox(
+              controller: controller,
+              onSend: onTap,
+            ),
+            Expanded(
+              child: ValueListenableBuilder<Box<RoomsModel>>(
+                valueListenable: Boxes.roomBox.listenable(),
+                builder: (_, value, __) {
+                  return ListView.builder(
+                    itemCount: roomInfo.chats.length,
+                    physics: const BouncingScrollPhysics(),
+                    reverse: true,
+                    itemBuilder: (context, index) {
+                      var msg = roomInfo.chats[index];
+                      return RoomsMsgCard(
+                          name: msg.username ?? "",
+                          message: msg.message ?? "",
+                          time: msg.time ?? "");
+                    },
+                  );
+                },
+              ),
             )
           ],
         ),
