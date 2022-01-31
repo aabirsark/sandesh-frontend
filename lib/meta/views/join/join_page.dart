@@ -59,7 +59,7 @@ class JoinPage extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            const Expanded(child: LocalUsers())
+            const Expanded(child: AllUsers())
           ],
         ),
       ),

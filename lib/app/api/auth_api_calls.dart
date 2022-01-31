@@ -55,16 +55,14 @@ class AuthApi {
     try {
       var uri = Uri.parse(API.getAllUsers);
       var res = await http.get(uri);
+      print(res.body);
       var jsonRes = jsonDecode(res.body);
-      print(jsonRes);
 
       if (res.statusCode != 200) print("Some error");
 
       users = _GetAllUserData.fromJson(jsonRes);
     } catch (e) {
       users = _GetAllUserData(data: []);
-
-      print("Can't handle, get all users the event sorry");
     }
 
     return users;

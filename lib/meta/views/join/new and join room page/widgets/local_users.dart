@@ -5,14 +5,14 @@ import 'package:sandesh/app/extension/navigation.ext.dart';
 import 'package:sandesh/meta/views/chats/chats_page.dart';
 import 'package:sandesh/model/auth/auth_response_model.dart';
 
-class LocalUsers extends StatefulWidget {
-  const LocalUsers({Key? key}) : super(key: key);
+class AllUsers extends StatefulWidget {
+  const AllUsers({Key? key}) : super(key: key);
 
   @override
-  State<LocalUsers> createState() => _LocalUsersState();
+  State<AllUsers> createState() => _AllUsersState();
 }
 
-class _LocalUsersState extends State<LocalUsers> {
+class _AllUsersState extends State<AllUsers> {
   List<UserData> users = [];
 
   @override
@@ -46,7 +46,7 @@ class _LocalUsersState extends State<LocalUsers> {
               },
               leading: CircleAvatar(
                 child: Text(
-                  users[index].username!.substring(0, 1),
+                  users[index].username!.substring(0, 1).toUpperCase(),
                   style: const TextStyle(color: Colors.white),
                 ),
                 radius: 23,

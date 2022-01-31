@@ -30,7 +30,6 @@ class _RoomsPageState extends State<RoomsPage> {
   void initState() {
     super.initState();
     controller = TextEditingController();
-    print(widget.roomCode);
     roomInfo = Boxes.getRoom(widget.roomCode);
   }
 
@@ -71,7 +70,7 @@ class _RoomsPageState extends State<RoomsPage> {
                     physics: const BouncingScrollPhysics(),
                     reverse: true,
                     itemBuilder: (context, index) {
-                      var msg = roomInfo.chats[index];
+                      var msg = roomInfo.chats.reversed.toList()[index];
                       return RoomsMsgCard(
                           name: msg.username ?? "",
                           message: msg.message ?? "",
