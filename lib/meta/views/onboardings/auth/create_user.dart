@@ -30,12 +30,7 @@ class _CreateUserState extends State<CreateUser> {
   final TextEditingController _fullNameController = TextEditingController();
   final TextEditingController _phoneNoController = TextEditingController();
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
-
+ 
   @override
   void dispose() {
     _usernameController.dispose();

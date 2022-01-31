@@ -36,9 +36,6 @@ class AuthApi {
       var uri = Uri.parse(API.createUser);
       var res = await http.post(uri, body: model.toJson());
       var jsonRes = jsonDecode(res.body);
-      print(jsonRes);
-
-      if (res.statusCode != 200) print("Some error");
 
       resModel = AuthResponseModel.fromJson(jsonRes);
     } catch (e) {
@@ -55,10 +52,7 @@ class AuthApi {
     try {
       var uri = Uri.parse(API.getAllUsers);
       var res = await http.get(uri);
-      print(res.body);
       var jsonRes = jsonDecode(res.body);
-
-      if (res.statusCode != 200) print("Some error");
 
       users = _GetAllUserData.fromJson(jsonRes);
     } catch (e) {
@@ -84,10 +78,10 @@ class _GetAllUserData {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    if (this.data != null) {
-      data['data'] = this.data.map((v) => v.toJson()).toList();
-    }
+    final Map<String, dynamic> data = <String, dynamic>{};
+
+    data['data'] = this.data.map((v) => v.toJson()).toList();
+
     return data;
   }
 }

@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:sandesh/app/contants.dart';
 import 'package:sandesh/app/extension/navigation.ext.dart';
 import 'package:sandesh/meta/views/onboardings/auth/create_user.dart';
@@ -16,10 +15,7 @@ class OnBoarding extends StatefulWidget {
 }
 
 class _OnBoardingState extends State<OnBoarding> {
-  getHeight(double height) {
-    print(height);
-    return height;
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -80,10 +76,10 @@ class _OnBoardingState extends State<OnBoarding> {
                           text: "New member? ",
                           style: TextStyle(
                               color: Colors.white30,
-                              fontSize: getHeight(
+                              fontSize: 
                                   constraints.maxHeight * .022 < 17
                                       ? constraints.maxHeight * .022
-                                      : 17),
+                                      : 17,
                               fontFamily: GoogleFonts.nunitoSans().fontFamily),
                           children: const [
                         TextSpan(

@@ -7,14 +7,12 @@ import 'package:hive/hive.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
 import 'package:sandesh/app/contants.dart';
-import 'package:sandesh/app/database/userdata/userData.db.dart';
 import 'package:sandesh/app/extension/navigation.ext.dart';
 import 'package:sandesh/app/sockets/web_sockets.dart';
 import 'package:sandesh/meta/views/home/views/chats/chats_view.dart';
 import 'package:sandesh/meta/views/home/views/rooms/rooms_view.dart';
 import 'package:sandesh/meta/views/join/join_page.dart';
 import 'package:sandesh/model/core/home%20provider/home.provider.dart';
-import 'package:socket_io_client/socket_io_client.dart' as io;
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:sandesh/app/contants.dart';
 import 'package:sandesh/app/extension/details.ext.dart';
 
 class RoomsMsgCard extends StatelessWidget {
@@ -26,7 +24,7 @@ class RoomsMsgCard extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 8.0),
                 child: Text(
                   name,
-                  style: TextStyle(color: Colors.grey, fontSize: 14),
+                  style: const TextStyle(color: Colors.grey, fontSize: 14),
                 ),
               ),
               const SizedBox(

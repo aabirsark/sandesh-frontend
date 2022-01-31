@@ -21,7 +21,7 @@ class AuthResponseModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['feedback'] = _feedback;
     if (_data != null) {
       data['data'] = _data!.toJson();
@@ -57,7 +57,7 @@ class UserData {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = _id;
     data['username'] = _username;
     data['name'] = _name;

@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:sandesh/app/api/room_api_calls.dart';
 import 'package:sandesh/app/contants.dart';
+import 'package:sandesh/app/database/userdata/userData.db.dart';
 import 'package:sandesh/app/extension/details.ext.dart';
 import 'package:sandesh/app/extension/navigation.ext.dart';
 import 'package:sandesh/model/database/rooms%20model/rooms_model.dart';
@@ -34,25 +34,35 @@ class RoomInfoPage extends StatelessWidget {
               trailing: Text(roomInfo.adminName ?? ""),
             ),
           ),
-          Container(
-            width: context.screenWidth,
-            padding: const EdgeInsets.symmetric(horizontal: 12.0),
-            child: Center(
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: const [
-                  Icon(
-                    Icons.double_arrow_rounded,
-                    color: Colors.red,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    "Exit Room",
-                    style: TextStyle(color: Colors.red, fontSize: 18),
-                  )
-                ],
+          GestureDetector(
+            onTap: () async {
+              bool deleted = await RoomApiService.deleteRoom(
+                  roomInfo.code ?? "", UserDataDB.username ?? "");
+              if (deleted) {
+                Navigator.popUntil(context, (route) => route.isFirst);
+                roomInfo.delete();
+              }
+            },
+            child: Container(
+              width: context.screenWidth,
+              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              child: Center(
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: const [
+                    Icon(
+                      Icons.double_arrow_rounded,
+                      color: Colors.red,
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      "Exit Room",
+                      style: TextStyle(color: Colors.red, fontSize: 18),
+                    )
+                  ],
+                ),
               ),
             ),
           ),
@@ -108,6 +118,7 @@ class _ParticipantsList extends StatelessWidget {
           return data == null
               ? const Center(child: CircularProgressIndicator())
               : ListView.builder(
+                  physics: const BouncingScrollPhysics(),
                   itemCount: data.data.length,
                   itemBuilder: (context, index) => Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),

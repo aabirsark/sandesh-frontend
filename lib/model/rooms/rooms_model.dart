@@ -1,5 +1,3 @@
-import 'package:sandesh/app/database/userdata/userData.db.dart';
-
 class RoomPushModel {
   final String code;
   final String? roomName;

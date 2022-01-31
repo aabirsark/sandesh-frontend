@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:sandesh/app/api/api.dart';
-import 'package:sandesh/app/database/userdata/userData.db.dart';
 import 'package:sandesh/model/rooms/room_participants.res.model.dart';
 import 'package:sandesh/model/rooms/rooms_model.dart';
 import 'package:sandesh/model/rooms/room_res.model.dart';
@@ -25,7 +24,6 @@ class RoomApiService {
         reModel = RoomResModel(feedback: "Server Side error", error: true);
       }
       var jsonRes = jsonDecode(res.body);
-      print(jsonRes);
 
       reModel = RoomResModel.fromJson(jsonRes);
     } catch (e) {
@@ -66,9 +64,7 @@ class RoomApiService {
     try {
       var uri = Uri.parse(API.getRoomParticipants);
 
-      var res = await http.post(uri, body: {
-        "code": code,
-      });
+      var res = await http.post(uri, body: {"code": code});
 
       var jsonData = jsonDecode(res.body);
       reModel = RoomParticipantsResModel.fromJson(jsonData);
@@ -77,5 +73,16 @@ class RoomApiService {
           feedback: "An error occured", error: true, data: []);
     }
     return reModel;
+  }
+
+  static Future deleteRoom(String code, String username) async {
+    try {
+      var uri = Uri.parse(API.deleteUser);
+
+      await http.delete(uri, body: {"code": code, "name": username});
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 }

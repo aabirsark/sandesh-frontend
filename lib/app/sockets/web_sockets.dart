@@ -89,7 +89,6 @@ class SocketClient {
         ..time = data['time']
         ..message = data['msg'];
       // ? Update Room Messages
-      print(data);
       SocketDatabaseAgreement.updateRoom(data['roomCode'], msg);
     });
   }

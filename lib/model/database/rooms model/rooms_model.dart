@@ -1,6 +1,5 @@
 import 'package:hive/hive.dart';
 
-import 'package:sandesh/model/database/chats%20model/chats_individual.dart';
 import 'package:sandesh/model/database/rooms%20model/rooms_indi.dart';
 
 part 'rooms_model.g.dart';

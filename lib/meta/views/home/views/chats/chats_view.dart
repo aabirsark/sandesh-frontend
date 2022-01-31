@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:sandesh/app/database/boxes.dart';
 import 'package:sandesh/meta/views/home/views/chats/widgets/chatsview_listtile.widget.dart';

@@ -16,10 +16,7 @@ class LoginTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    getHeight(double height) {
-      print(height);
-      return height;
-    }
+    
 
     return Container(
       height: 60,
