@@ -1,5 +1,5 @@
 class API {
-  static String api = "https://rxsandesh-bacend.herokuapp.com";
+  static String api = "http://192.168.42.117:8000";
 
   // ? For Authentication
   static String loginUri = "$api/login";

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:sandesh/app/api/api.dart';
 import 'package:sandesh/app/database/userdata/userData.db.dart';
+import 'package:sandesh/model/rooms/room_participants.res.model.dart';
 import 'package:sandesh/model/rooms/rooms_model.dart';
 import 'package:sandesh/model/rooms/room_res.model.dart';
 
@@ -55,6 +56,26 @@ class RoomApiService {
       reModel = RoomResModel(feedback: "Cannot Connect to Server", error: true);
     }
 
+    return reModel;
+  }
+
+  static Future<RoomParticipantsResModel> getRoomParticipants(
+      String code) async {
+    late RoomParticipantsResModel reModel;
+
+    try {
+      var uri = Uri.parse(API.getRoomParticipants);
+
+      var res = await http.post(uri, body: {
+        "code": code,
+      });
+
+      var jsonData = jsonDecode(res.body);
+      reModel = RoomParticipantsResModel.fromJson(jsonData);
+    } catch (e) {
+      reModel = RoomParticipantsResModel(
+          feedback: "An error occured", error: true, data: []);
+    }
     return reModel;
   }
 }

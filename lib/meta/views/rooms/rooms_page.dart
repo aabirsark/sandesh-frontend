@@ -1,14 +1,17 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:sandesh/app/api/room_api_calls.dart';
 import 'package:sandesh/app/database/boxes.dart';
 import 'package:sandesh/app/database/userdata/userData.db.dart';
 import 'package:sandesh/app/extension/navigation.ext.dart';
 import 'package:sandesh/app/sockets/web_sockets.dart';
 import 'package:sandesh/app/utils/date_tools.dart';
 import 'package:sandesh/meta/universal%20widget/message_box.dart';
+import 'package:sandesh/meta/views/rooms/rooms_info.dart';
 import 'package:sandesh/meta/views/rooms/widgets/room_msg_detail.dart';
 import 'package:sandesh/model/database/rooms%20model/rooms_indi.dart';
 import 'package:sandesh/model/database/rooms%20model/rooms_model.dart';
@@ -102,7 +105,13 @@ class _RoomsPageState extends State<RoomsPage> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: IconButton(
-              onPressed: () {}, icon: const Icon(Iconsax.info_circle)),
+              onPressed: ()  {
+                context.navigateTo(RoomInfoPage(
+                  roomInfo: roomInfo,
+                ));
+                
+              },
+              icon: const Icon(Iconsax.info_circle)),
         )
       ],
     );
